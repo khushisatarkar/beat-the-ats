@@ -13,7 +13,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 import json
 import tempfile
 
-# Download required NLTK data
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
@@ -27,7 +26,7 @@ except LookupError:
 app = Flask(__name__)
 CORS(app)
 
-# Load spaCy model for NLP processing
+# load spaCy model for NLP processing
 try:
     nlp = spacy.load("en_core_web_sm")
 except OSError:
@@ -379,4 +378,5 @@ def analyze_text():
         return jsonify({'error': f'An error occurred: {str(e)}'}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)

@@ -95,9 +95,40 @@ Resume-Scanner/
 ├── app.py                 # Main Flask application
 ├── requirements.txt       # Python dependencies
 ├── README.md             # This file
+├── DEPLOYMENT.md         # Detailed deployment guide
+├── deploy.sh             # Linux/macOS deployment script
+├── deploy.bat            # Windows deployment script
+├── Dockerfile            # Docker configuration
+├── docker-compose.yml    # Docker Compose setup
+├── render.yaml           # Render deployment config
+├── railway.json          # Railway deployment config
+├── Procfile              # Heroku deployment config
 └── templates/
     └── index.html        # Web interface
 ```
+
+## 🚀 Deployment
+
+**Want to deploy so others can use your app?**
+
+### Quick Deployment Options:
+
+**Option 1: Use the deployment script**
+```bash
+# Windows
+deploy.bat
+
+# macOS/Linux
+./deploy.sh
+```
+
+**Option 2: Manual deployment**
+- **Render (Recommended)**: [render.com](https://render.com) - Free hosting
+- **Railway**: [railway.app](https://railway.app) - Free hosting  
+- **Heroku**: [heroku.com](https://heroku.com) - Classic platform
+- **Docker**: Containerized deployment
+
+📖 **See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions**
 
 ## 🔍 How Job Matching Works
 
