@@ -1,4 +1,4 @@
-# Resume Scanner - AI-Powered Resume Analysis
+# Beat The ATS - AI-Powered Resume Scanner and Analyzer
 
 A modern web application that scans resumes, extracts skills, and provides job matching scores using AI and NLP techniques.
 
