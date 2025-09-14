@@ -4,7 +4,7 @@ services:
     env: python
     buildCommand: |
       pip install -r requirements.txt
-      python -m nltk.downloader punkt stopwords
-      python -m spacy download en_core_web_sm
+      python -m nltk.downloader punkt stopwords -q
+      python -m spacy download en_core_web_sm --quiet
     startCommand: gunicorn app:app
     plan: free
