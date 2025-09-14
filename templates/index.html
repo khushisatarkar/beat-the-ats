@@ -1,521 +1,563 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beat The ATS</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #e6cfa9;
+        min-height: 100vh;
+        color: #d9a299;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: white;
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #9a3f3f;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px #fbf9d1;
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .main-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .input-section {
+        background: #fbf9d1;
+        /* height: 500px; */
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .input-section h2 {
+        color: #c1856d;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #c1856d;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e1e5e9;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #c1856d;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .file-upload {
+        border: 2px dashed #c1856d;
+        border-radius: 8px;
+        padding: 40px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #f8f9ff;
+      }
+
+      .file-upload:hover {
+        background: #e8ecff;
+        border-color: #9a3f3f;
+      }
+
+      .file-upload input[type="file"] {
+        display: none;
+      }
+
+      .file-upload-text {
+        color: #c1856d;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+
+      .file-upload-subtext {
+        color: #c1856d;
+        font-size: 0.9rem;
+      }
+
+      .btn {
+        background: #c1856d;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px #fbf9d1;
+      }
+
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .results-section {
+        background: #fbf9d1;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        max-height: 600px;
+        overflow-y: auto;
+      }
+
+      .results-section h2 {
+        color: #c1856d;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+      }
+
+      .score-display {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+        border-radius: 10px;
+      }
+
+      .score-number {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #c1856d;
+        margin-bottom: 10px;
+      }
+
+      .score-label {
+        color: #c1856d;
+        font-size: 1.1rem;
+      }
+
+      .skills-section {
+        margin-bottom: 25px;
+      }
+
+      .skills-section h3 {
+        color: #c1856d;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        border-bottom: 2px solid #e1e5e9;
+        padding-bottom: 8px;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+      }
+
+      .skill-tag {
+        background: #c1856d;
+        color: #fdebd0;
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .summary-item {
+        background: #fdebd0;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .summary-number {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #c1856d;
+        margin-bottom: 5px;
+      }
+
+      .summary-label {
+        color: #c1856d;
+        font-size: 0.9rem;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #c1856d;
+      }
+
+      .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #c1856d;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .error {
+        background: #fdebd0;
+        color: #d63031;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 4px solid #d63031;
+      }
+
+      .success {
+        background: #e6ffe6;
+        color: #00b894;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 4px solid #00b894;
+      }
+
+      .tabs {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e1e5e9;
+      }
+
+      .tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .tab.active {
+        border-bottom-color: #c1856d;
+        color: #c1856d;
+        font-weight: 600;
+      }
+
+      .tab:hover {
+        color: #c1856d;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .main-content {
+          grid-template-columns: 1fr;
         }
 
         .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+          font-size: 2rem;
         }
 
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .container {
+          padding: 15px;
         }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .input-section {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .input-section h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #555;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .file-upload {
-            border: 2px dashed #667eea;
-            border-radius: 8px;
-            padding: 40px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: #f8f9ff;
-        }
-
-        .file-upload:hover {
-            background: #e8ecff;
-            border-color: #5a6fd8;
-        }
-
-        .file-upload input[type="file"] {
-            display: none;
-        }
-
-        .file-upload-text {
-            color: #667eea;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
-        .file-upload-subtext {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .results-section {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .results-section h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .score-display {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
-            border-radius: 10px;
-        }
-
-        .score-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        .score-label {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .skills-section {
-            margin-bottom: 25px;
-        }
-
-        .skills-section h3 {
-            color: #555;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            border-bottom: 2px solid #e1e5e9;
-            padding-bottom: 8px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-        }
-
-        .skill-tag {
-            background: #667eea;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .summary-item {
-            background: #f8f9ff;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .summary-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .summary-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error {
-            background: #ffe6e6;
-            color: #d63031;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 4px solid #d63031;
-        }
-
-        .success {
-            background: #e6ffe6;
-            color: #00b894;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 4px solid #00b894;
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e1e5e9;
-        }
-
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .tab.active {
-            border-bottom-color: #667eea;
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .tab:hover {
-            color: #667eea;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .container {
-                padding: 15px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <h1>Can You Beat The ATS?</h1>
-            <p>AI-Powered Resume Scanner and Analyzer</p>
+      <div class="header">
+        <h1>Can You Beat The ATS?</h1>
+        <p>AI-Powered Resume Scanner and Analyzer</p>
+      </div>
+
+      <div class="main-content">
+        <div class="input-section">
+          <div class="tabs">
+            <div class="tab active" onclick="switchTab('file')">
+              File Upload
+            </div>
+            <div class="tab" onclick="switchTab('text')">Text Input</div>
+          </div>
+
+          <div id="file-tab" class="tab-content active">
+            <h2>Upload Resume</h2>
+            <form id="resume-form">
+              <div class="form-group">
+                <label for="resume-file">Resume File</label>
+                <div
+                  class="file-upload"
+                  onclick="document.getElementById('resume-file').click()"
+                >
+                  <div class="file-upload-text">Click to upload resume</div>
+                  <div class="file-upload-subtext">
+                    Supports PDF, DOCX, and TXT files
+                  </div>
+                  <input
+                    type="file"
+                    id="resume-file"
+                    name="resume"
+                    accept=".pdf,.docx,.txt"
+                    required
+                  />
+                </div>
+                <div
+                  id="file-name"
+                  style="margin-top: 10px; color: #c1856d; font-weight: 500"
+                ></div>
+              </div>
+
+              <div class="form-group">
+                <label for="job-description">Job Description</label>
+                <textarea
+                  id="job-description"
+                  name="job_description"
+                  placeholder="Paste the job description here to calculate matching score..."
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn" id="scan-btn">
+                Scan Resume
+              </button>
+            </form>
+          </div>
+
+          <div id="text-tab" class="tab-content">
+            <h2>Text Analysis</h2>
+            <form id="text-form">
+              <div class="form-group">
+                <label for="resume-text">Resume Text</label>
+                <textarea
+                  id="resume-text"
+                  name="resume_text"
+                  placeholder="Paste your resume text here..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="job-description-text">Job Description</label>
+                <textarea
+                  id="job-description-text"
+                  name="job_description"
+                  placeholder="Paste the job description here to calculate matching score..."
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn" id="analyze-btn">
+                Analyze Text
+              </button>
+            </form>
+          </div>
         </div>
 
-        <div class="main-content">
-            <div class="input-section">
-                <div class="tabs">
-                    <div class="tab active" onclick="switchTab('file')">File Upload</div>
-                    <div class="tab" onclick="switchTab('text')">Text Input</div>
-                </div>
-
-                <div id="file-tab" class="tab-content active">
-                    <h2>Upload Resume</h2>
-                    <form id="resume-form">
-                        <div class="form-group">
-                            <label for="resume-file">Resume File</label>
-                            <div class="file-upload" onclick="document.getElementById('resume-file').click()">
-                                <div class="file-upload-text">Click to upload resume</div>
-                                <div class="file-upload-subtext">Supports PDF, DOCX, and TXT files</div>
-                                <input type="file" id="resume-file" name="resume" accept=".pdf,.docx,.txt" required>
-                            </div>
-                            <div id="file-name" style="margin-top: 10px; color: #667eea; font-weight: 500;"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="job-description">Job Description</label>
-                            <textarea id="job-description" name="job_description" placeholder="Paste the job description here to calculate matching score..."></textarea>
-                        </div>
-
-                        <button type="submit" class="btn" id="scan-btn">
-                            Scan Resume
-                        </button>
-                    </form>
-                </div>
-
-                <div id="text-tab" class="tab-content">
-                    <h2>Text Analysis</h2>
-                    <form id="text-form">
-                        <div class="form-group">
-                            <label for="resume-text">Resume Text</label>
-                            <textarea id="resume-text" name="resume_text" placeholder="Paste your resume text here..." required></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="job-description-text">Job Description</label>
-                            <textarea id="job-description-text" name="job_description" placeholder="Paste the job description here to calculate matching score..."></textarea>
-                        </div>
-
-                        <button type="submit" class="btn" id="analyze-btn">
-                            Analyze Text
-                        </button>
-                    </form>
-                </div>
+        <div class="results-section">
+          <h2>Analysis Results</h2>
+          <div id="results-content">
+            <div class="loading">
+              <!-- <div class="spinner"></div> -->
+              <p>Upload a resume or paste text to get started</p>
             </div>
-
-            <div class="results-section">
-                <h2>Analysis Results</h2>
-                <div id="results-content">
-                    <div class="loading">
-                        <!-- <div class="spinner"></div> -->
-                        <p>Upload a resume or paste text to get started</p>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <script>
-        let currentTab = 'file';
+      let currentTab = "file";
 
-        function switchTab(tabName) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected tab content and mark tab as active
-            document.getElementById(tabName + '-tab').classList.add('active');
-            event.target.classList.add('active');
-            
-            currentTab = tabName;
+      function switchTab(tabName) {
+        // Hide all tab contents
+        document.querySelectorAll(".tab-content").forEach((content) => {
+          content.classList.remove("active");
+        });
+
+        // Remove active class from all tabs
+        document.querySelectorAll(".tab").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+
+        // Show selected tab content and mark tab as active
+        document.getElementById(tabName + "-tab").classList.add("active");
+        event.target.classList.add("active");
+
+        currentTab = tabName;
+      }
+
+      // File upload handling
+      document
+        .getElementById("resume-file")
+        .addEventListener("change", function (e) {
+          const fileName = e.target.files[0]?.name || "";
+          document.getElementById("file-name").textContent = fileName;
+        });
+
+      // Form submissions
+      document
+        .getElementById("resume-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          scanResume();
+        });
+
+      document
+        .getElementById("text-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          analyzeText();
+        });
+
+      function scanResume() {
+        const formData = new FormData();
+        const fileInput = document.getElementById("resume-file");
+        const jobDescription = document.getElementById("job-description").value;
+
+        if (!fileInput.files[0]) {
+          showError("Please select a resume file");
+          return;
         }
 
-        // File upload handling
-        document.getElementById('resume-file').addEventListener('change', function(e) {
-            const fileName = e.target.files[0]?.name || '';
-            document.getElementById('file-name').textContent = fileName;
-        });
+        formData.append("resume", fileInput.files[0]);
+        formData.append("job_description", jobDescription);
 
-        // Form submissions
-        document.getElementById('resume-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            scanResume();
-        });
+        showLoading();
 
-        document.getElementById('text-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            analyzeText();
-        });
-
-        function scanResume() {
-            const formData = new FormData();
-            const fileInput = document.getElementById('resume-file');
-            const jobDescription = document.getElementById('job-description').value;
-
-            if (!fileInput.files[0]) {
-                showError('Please select a resume file');
-                return;
+        fetch("/scan-resume", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              displayResults(data);
+            } else {
+              showError(data.error || "An error occurred");
             }
+          })
+          .catch((error) => {
+            showError("Network error: " + error.message);
+          });
+      }
 
-            formData.append('resume', fileInput.files[0]);
-            formData.append('job_description', jobDescription);
+      function analyzeText() {
+        const resumeText = document.getElementById("resume-text").value;
+        const jobDescription = document.getElementById(
+          "job-description-text"
+        ).value;
 
-            showLoading();
-            
-            fetch('/scan-resume', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    displayResults(data);
-                } else {
-                    showError(data.error || 'An error occurred');
-                }
-            })
-            .catch(error => {
-                showError('Network error: ' + error.message);
-            });
+        if (!resumeText.trim()) {
+          showError("Please enter resume text");
+          return;
         }
 
-        function analyzeText() {
-            const resumeText = document.getElementById('resume-text').value;
-            const jobDescription = document.getElementById('job-description-text').value;
+        showLoading();
 
-            if (!resumeText.trim()) {
-                showError('Please enter resume text');
-                return;
+        fetch("/analyze-text", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            resume_text: resumeText,
+            job_description: jobDescription,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              displayResults(data);
+            } else {
+              showError(data.error || "An error occurred");
             }
+          })
+          .catch((error) => {
+            showError("Network error: " + error.message);
+          });
+      }
 
-            showLoading();
-            
-            fetch('/analyze-text', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    resume_text: resumeText,
-                    job_description: jobDescription
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    displayResults(data);
-                } else {
-                    showError(data.error || 'An error occurred');
-                }
-            })
-            .catch(error => {
-                showError('Network error: ' + error.message);
-            });
-        }
-
-        function showLoading() {
-            document.getElementById('results-content').innerHTML = `
+      function showLoading() {
+        document.getElementById("results-content").innerHTML = `
                 <div class="loading">
                     <div class="spinner"></div>
                     <p>Analyzing resume...</p>
                 </div>
             `;
-        }
+      }
 
-        function showError(message) {
-            document.getElementById('results-content').innerHTML = `
+      function showError(message) {
+        document.getElementById("results-content").innerHTML = `
                 <div class="error">
                     <strong>Error:</strong> ${message}
                 </div>
             `;
-        }
+      }
 
-        function displayResults(data) {
-            const resultsHtml = `
+      function displayResults(data) {
+        const resultsHtml = `
                 <div class="success">
                     <strong>Success!</strong> Resume analyzed successfully.
                 </div>
@@ -527,61 +569,100 @@
 
                 <div class="skills-section">
                     <h3>Extracted Skills</h3>
-                    ${Object.entries(data.skills).map(([category, skills]) => `
+                    ${Object.entries(data.skills)
+                      .map(
+                        ([category, skills]) => `
                         <div style="margin-bottom: 15px;">
-                            <strong style="color: #667eea; text-transform: capitalize;">${category.replace('_', ' ')}:</strong>
+                            <strong style="color: #C1856D; text-transform: capitalize;">${category.replace(
+                              "_",
+                              " "
+                            )}:</strong>
                             <div class="skills-grid" style="margin-top: 8px;">
-                                ${skills.map(skill => `<div class="skill-tag">${skill}</div>`).join('')}
+                                ${skills
+                                  .map(
+                                    (skill) =>
+                                      `<div class="skill-tag">${skill}</div>`
+                                  )
+                                  .join("")}
                             </div>
                         </div>
-                    `).join('')}
+                    `
+                      )
+                      .join("")}
                 </div>
 
                 <div class="summary-section">
                     <h3>Resume Summary</h3>
                     <div class="summary-grid">
                         <div class="summary-item">
-                            <div class="summary-number">${data.summary.total_skills}</div>
+                            <div class="summary-number">${
+                              data.summary.total_skills
+                            }</div>
                             <div class="summary-label">Total Skills</div>
                         </div>
                         <div class="summary-item">
-                            <div class="summary-number">${data.summary.skill_categories}</div>
+                            <div class="summary-number">${
+                              data.summary.skill_categories
+                            }</div>
                             <div class="summary-label">Skill Categories</div>
                         </div>
                         <div class="summary-item">
-                            <div class="summary-number">${data.summary.estimated_pages}</div>
+                            <div class="summary-number">${
+                              data.summary.estimated_pages
+                            }</div>
                             <div class="summary-label">Estimated Pages</div>
                         </div>
                         <div class="summary-item">
-                            <div class="summary-number">${data.summary.education_mentions}</div>
+                            <div class="summary-number">${
+                              data.summary.education_mentions
+                            }</div>
                             <div class="summary-label">Education Mentions</div>
                         </div>
                         <div class="summary-item">
-                            <div class="summary-number">${data.summary.experience_mentions}</div>
+                            <div class="summary-number">${
+                              data.summary.experience_mentions
+                            }</div>
                             <div class="summary-label">Experience Mentions</div>
                         </div>
                     </div>
                 </div>
 
-                ${data.summary.contact_info.emails.length > 0 || data.summary.contact_info.phones.length > 0 ? `
+                ${
+                  data.summary.contact_info.emails.length > 0 ||
+                  data.summary.contact_info.phones.length > 0
+                    ? `
                     <div class="contact-section" style="margin-top: 20px;">
                         <h3>Contact Information</h3>
-                        ${data.summary.contact_info.emails.length > 0 ? `
+                        ${
+                          data.summary.contact_info.emails.length > 0
+                            ? `
                             <div style="margin-bottom: 10px;">
-                                <strong>Emails:</strong> ${data.summary.contact_info.emails.join(', ')}
+                                <strong>Emails:</strong> ${data.summary.contact_info.emails.join(
+                                  ", "
+                                )}
                             </div>
-                        ` : ''}
-                        ${data.summary.contact_info.phones.length > 0 ? `
+                        `
+                            : ""
+                        }
+                        ${
+                          data.summary.contact_info.phones.length > 0
+                            ? `
                             <div>
-                                <strong>Phones:</strong> ${data.summary.contact_info.phones.join(', ')}
+                                <strong>Phones:</strong> ${data.summary.contact_info.phones.join(
+                                  ", "
+                                )}
                             </div>
-                        ` : ''}
+                        `
+                            : ""
+                        }
                     </div>
-                ` : ''}
+                `
+                    : ""
+                }
             `;
 
-            document.getElementById('results-content').innerHTML = resultsHtml;
-        }
+        document.getElementById("results-content").innerHTML = resultsHtml;
+      }
     </script>
-</body>
+  </body>
 </html>
