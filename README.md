@@ -92,43 +92,14 @@ Analyze resume text directly.
 
 ```
 Resume-Scanner/
-├── app.py                 # Main Flask application
-├── requirements.txt       # Python dependencies
-├── README.md             # This file
-├── DEPLOYMENT.md         # Detailed deployment guide
-├── deploy.sh             # Linux/macOS deployment script
-├── deploy.bat            # Windows deployment script
-├── Dockerfile            # Docker configuration
-├── docker-compose.yml    # Docker Compose setup
+├── app.py                # main Flask application
+├── requirements.txt       
+├── README.md             
+├── .gitignore
 ├── render.yaml           # Render deployment config
-├── railway.json          # Railway deployment config
-├── Procfile              # Heroku deployment config
 └── templates/
-    └── index.html        # Web interface
+    └── index.html        # web interface
 ```
-
-## 🚀 Deployment
-
-**Want to deploy so others can use your app?**
-
-### Quick Deployment Options:
-
-**Option 1: Use the deployment script**
-```bash
-# Windows
-deploy.bat
-
-# macOS/Linux
-./deploy.sh
-```
-
-**Option 2: Manual deployment**
-- **Render (Recommended)**: [render.com](https://render.com) - Free hosting
-- **Railway**: [railway.app](https://railway.app) - Free hosting  
-- **Heroku**: [heroku.com](https://heroku.com) - Classic platform
-- **Docker**: Containerized deployment
-
-📖 **See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions**
 
 ## 🔍 How Job Matching Works
 
@@ -185,18 +156,6 @@ python app.py
 
 ```bash
 gunicorn -w 4 -b 0.0.0.0:5000 app:app
-```
-
-### Docker (Optional)
-
-```dockerfile
-FROM python:3.9-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
-EXPOSE 5000
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
 ```
 
 ## 🧪 Testing
@@ -285,13 +244,6 @@ Modify `templates/index.html` for different styling and layout.
    pip install -r requirements.txt --force-reinstall
    ```
 
-## 📈 Performance Tips
-
-- **Large Files**: For very long resumes, consider chunking text processing
-- **Multiple Users**: Use Gunicorn with multiple workers for production
-- **Caching**: Implement Redis caching for repeated job descriptions
-- **Async Processing**: Use Celery for background job processing
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -304,22 +256,8 @@ Modify `templates/index.html` for different styling and layout.
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 🙏 Acknowledgments
+**Happy Resume Scanning!**
 
-- **spaCy**: Natural language processing library
-- **NLTK**: Natural language toolkit
-- **scikit-learn**: Machine learning library for TF-IDF and similarity
-- **Flask**: Web framework for Python
+## 🙋‍♀️ Developed By Khushi Satarkar 
 
-## 📞 Support
-
-For questions or issues:
-
-1. Check the troubleshooting section
-2. Review the code comments
-3. Open an issue on GitHub
-4. Check the Flask and spaCy documentation
-
----
-
-**Happy Resume Scanning! 🎉**
+Connect with me here! (Linkedin: [https://www.linkedin.com/in/khushi-satarkar-039056254/])
