@@ -26,6 +26,10 @@ except LookupError:
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/health")
+def health():
+    return "OK"
+
 # load spaCy model for NLP processing
 try:
     nlp = spacy.load("en_core_web_sm")
